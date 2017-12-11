@@ -18,6 +18,10 @@
              <redis />
          </provider>
 
+         <provider name="configurable_redis_with_serializer_provider">
+             <redis />
+         </provider>
+
          <provider name="configurable_mongodb_provider">
              <mongodb />
          </provider>

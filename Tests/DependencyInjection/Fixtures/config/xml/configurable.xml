@@ -39,6 +39,10 @@
             <redis host="localhost" port="11211" />
         </provider>
 
+        <provider name="configurable_redis_with_serializer_provider">
+            <redis host="localhost" port="11211" />
+        </provider>
+
         <provider name="configurable_mongodb_provider">
             <mongodb server="localhost:11211" >
                 <database-name>my_database</database-name>

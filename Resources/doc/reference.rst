@@ -69,7 +69,6 @@ This provider defines no configuration options.
     Server list
 
     * ``server``
-
       * ``host``, Memcache host
       * ``port``, Memcache port
 
@@ -82,7 +81,6 @@ This provider defines no configuration options.
     Server list
 
     * ``server``
-
       * ``host``, Memcached host
       * ``port``, Memcached port
 
@@ -97,6 +95,24 @@ This provider defines no configuration options.
     Umask to revoke permissions
 
 ``redis``
+~~~~~~~~~
+
+``connection_id``
+    Redis connection service id
+``host``
+    Redis host
+``port``
+    Redis port
+``password``
+    Redis password
+``timeout``
+    Redis connection timeout
+``database``
+    Redis database selection (integer)
+``persistent``
+    Whether to use persistent connection or not (bool)
+
+``redis_with_serializer``
 ~~~~~~~~~
 
 ``connection_id``

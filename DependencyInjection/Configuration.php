@@ -74,6 +74,7 @@ class Configuration implements ConfigurationInterface
     public function getProviderNames(NodeInterface $tree)
     {
         foreach ($tree->getChildren() as $providers) {
+
             if ($providers->getName() !== 'providers') {
                 continue;
             }
@@ -116,7 +117,7 @@ class Configuration implements ConfigurationInterface
                 $options = reset($params);
                 $conf    = array(
                     'type'            => 'custom_provider',
-                    'namespace' => isset($conf['namespace']) ? $conf['namespace'] : null ,
+                    'namespace'       => $conf['namespace'] ?: null,
                     'custom_provider' => array(
                         'type'      => $conf['type'],
                         'options'   => $options ?: null,
@@ -191,6 +192,7 @@ class Configuration implements ConfigurationInterface
                             ->append($this->addPhpFileNode())
                             ->append($this->addMongoNode())
                             ->append($this->addRedisNode())
+                            ->append($this->addRedisWithSerializerNode())
                             ->append($this->addPredisNode())
                             ->append($this->addRiakNode())
                             ->append($this->addSqlite3Node())
@@ -378,6 +380,32 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('timeout')->defaultNull()->end()
                 ->scalarNode('database')->defaultNull()->end()
                 ->booleanNode('persistent')->defaultFalse()->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    /**
+     * Build redis node configuration definition
+     *
+     * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
+     */
+    private function addRedisWithSerializerNode()
+    {
+        $builder = new TreeBuilder();
+        $node    = $builder->root('redis_with_serializer');
+
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('connection_id')->defaultNull()->end()
+            ->scalarNode('host')->defaultValue('%doctrine_cache.redis.host%')->end()
+            ->scalarNode('port')->defaultValue('%doctrine_cache.redis.port%')->end()
+            ->scalarNode('password')->defaultNull()->end()
+            ->scalarNode('timeout')->defaultNull()->end()
+            ->scalarNode('database')->defaultNull()->end()
+            ->booleanNode('persistent')->defaultFalse()->end()
             ->end()
         ;
 
